@@ -31,7 +31,7 @@ This project demonstrates a Spring Boot application with MongoDB integration, fo
 The application uses a custom thread pool configuration for asynchronous task execution:
 - **Core Pool Size**: 8
 - **Max Pool Size**: 16
-- **Queue Capacity**: 10000
+- **Queue Capacity**: 1000
 
 
 ## Running Tests
