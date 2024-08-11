@@ -13,7 +13,7 @@ This project demonstrates a Spring Boot application with MongoDB integration, fo
 ## Setup Instructions
 1. Clone the repository:
     ```sh
-    gh repo clone dwididit/springboot-mongodb-multithreading-concurrency springboot-mongodb-multithreading-concurrency
+    gh repo clone dwididit/springboot-mongodb-multithreading-concurrency
     cd springboot-mongodb-multithreading-concurrency/
     ```
 
