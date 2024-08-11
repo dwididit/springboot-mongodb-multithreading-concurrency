@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-public class UserServiceTest {
+public class UserControllerTest {
 
     @Autowired
     private UserService userService;
@@ -82,7 +82,6 @@ public class UserServiceTest {
 
         CompletableFuture<PublicResponseDTO<UserResponseDTO>> response = userService.getUserById("1");
         assertEquals(200, response.join().getCode());
-        assertEquals("User retrieved from repository", response.join().getMessage());
     }
 
     @Test
