@@ -4,6 +4,8 @@ import dev.dwidi.springbootmongodbmultithreadingconcurrency.dto.PublicResponseDT
 import dev.dwidi.springbootmongodbmultithreadingconcurrency.dto.user.UserRequestDTO;
 import dev.dwidi.springbootmongodbmultithreadingconcurrency.dto.user.UserResponseDTO;
 import dev.dwidi.springbootmongodbmultithreadingconcurrency.entity.User;
+import dev.dwidi.springbootmongodbmultithreadingconcurrency.exceptions.UserAlreadyExistsException;
+import dev.dwidi.springbootmongodbmultithreadingconcurrency.exceptions.UserNotFoundException;
 import dev.dwidi.springbootmongodbmultithreadingconcurrency.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +42,7 @@ public class UserService {
             try {
                 if (userRepository.findByUsername(userRequestDTO.getUsername()).isPresent() ||
                         userRepository.findByEmail(userRequestDTO.getEmail()).isPresent()) {
-                    throw new RuntimeException("User already exists");
+                    throw new UserAlreadyExistsException("User already exist");
                 }
 
                 User user = new User();
@@ -74,8 +76,7 @@ public class UserService {
                     userCache.put(user1.getId(), user1);
                     return new PublicResponseDTO<>(200, "User retrieved from repository", new UserResponseDTO(user1));
                 })
-                .orElseThrow(() -> new RuntimeException("User not found"))
-        );
+                .orElseThrow(() -> new UserNotFoundException("User not found")));
     }
     /**
      * Gets all users.
@@ -93,9 +94,8 @@ public class UserService {
                     userCache.put(updatedUser.getId(), updatedUser);
                     return new PublicResponseDTO<>(200, "User updated successfully", new UserResponseDTO(updatedUser));
                 })
-                .orElseThrow(() -> new RuntimeException("User not found")));
+                .orElseThrow(() -> new UserNotFoundException("User not found")));
     }
-
     /**
      * Deletes a user.
      *
@@ -110,6 +110,6 @@ public class UserService {
                     userCache.remove(userId);
                     return new PublicResponseDTO<>(200, "User deleted successfully", null);
                 })
-                .orElseThrow(() -> new RuntimeException("User not found")));
+                .orElseThrow(() -> new UserNotFoundException("User not found")));
     }
 }
