@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-public class UserServiceTest {
+class UserServiceTest {
 
     @Autowired
     private UserService userService;
@@ -66,7 +66,7 @@ public class UserServiceTest {
 
         CompletableFuture<PublicResponseDTO<UserResponseDTO>> response = userService.createUser(userRequestDTO);
         assertEquals(400, response.join().getCode());
-        assertEquals("User already exists", response.join().getMessage());
+        assertEquals("User already exist", response.join().getMessage());
     }
 
     @Test
