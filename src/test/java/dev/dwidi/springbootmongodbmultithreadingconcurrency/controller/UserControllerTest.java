@@ -67,7 +67,7 @@ class UserControllerTest {
 
         CompletableFuture<PublicResponseDTO<UserResponseDTO>> response = userService.createUser(userRequestDTO);
         assertEquals(400, response.join().getCode());
-        assertEquals("User already exist", response.join().getMessage());
+        assertEquals("User already exists", response.join().getMessage());
     }
 
     @Test
