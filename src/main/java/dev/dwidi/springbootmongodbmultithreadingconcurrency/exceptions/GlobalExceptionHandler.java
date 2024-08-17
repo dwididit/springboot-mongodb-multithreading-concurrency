@@ -29,4 +29,10 @@ public class GlobalExceptionHandler {
         log.error("UserAlreadyExistException occurred: {}, request: {}", exception, request);
         return ResponseEntity.ok(new PublicResponseDTO<>(HttpStatus.CONFLICT.value(), exception.getMessage(), null));
     }
+
+    @ExceptionHandler(EmailSendFailedException.class)
+    public ResponseEntity<PublicResponseDTO<String>> handleEmailSendFailedException(WebRequest request, EmailSendFailedException exception) {
+        log.error("EmailSendFailedException occurred: {}, request: {}", exception, request);
+        return ResponseEntity.ok(new PublicResponseDTO<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), exception.getMessage(), null));
+    }
 }
